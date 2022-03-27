@@ -1,0 +1,51 @@
+﻿@model WebAppPersonelGorevDagitim.Models.ProsesDagitimRepository
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<head>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+</head>
+
+<h1>Liste Oluştur</h1>
+
+<h4>ProsesDagitimRepository</h4>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@using (Html.BeginForm("BuildList", "ProsesDagitim", FormMethod.Post))
+{
+    <div>Tarih: @Html.TextBox("Tarih", ((DateTime)ViewBag.fromDate).ToShortDateString(), new { @class = "DatePicker", @readonly = "readonly" })</div>
+    <br />
+
+    <input type="submit" value="Oluştur" class="btn btn-primary" />
+    <span> </span>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+<script type="text/javascript">
+        $(function () {
+            $(".DatePicker").datepicker({
+                autoclose: true,
+                format: 'dd.mm.yyyy',
+                language: 'tr'
+            });
+
+                @*$(".DatePicker").datepicker({
+                autoclose: true,
+                format: 'dd.mm.yyyy'
+            }).on('changeDate', function (selected) {
+                //@ViewBag.fromDate = selected.date;
+                //alert(@ViewBag.fromDate);
+            });*@
+        });
+</script>
+}
